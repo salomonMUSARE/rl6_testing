@@ -290,7 +290,6 @@ class CustomEnv:
 
         self.prev_net_worth = self.net_worth
         self.net_worth = self.balance + self.crypto_held * current_price
-        print(f"{self.current_step} orders: {self.episode_orders} balance: {self.net_worth}")
 
         self.orders_history.append([self.balance, self.net_worth, self.crypto_bought, self.crypto_sold, self.crypto_held])
 
@@ -491,5 +490,5 @@ if __name__ == "__main__":
 
     # multiprocessing training/testing. Note - run from cmd or terminal
     agent = CustomAgent(lookback_window_size=lookback_window_size, lr=0.00001, epochs=5, optimizer=Adam, batch_size = 32, model="CNN")
-    #train_multiprocessing(CustomEnv, agent, train_df, num_worker = 32, training_batch_size=500, visualize=False, EPISODES=200000)
+    train_multiprocessing(CustomEnv, agent, train_df, num_worker = 1, training_batch_size=500, visualize=False, EPISODES=200000)
     test_multiprocessing(CustomEnv, agent, train_df, num_worker = 1, visualize=False, test_episodes=1, folder="2021_01_25_22_17_Crypto_trader", name="3142.13_Crypto_trader", comment="Dense")
